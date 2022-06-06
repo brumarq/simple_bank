@@ -5,8 +5,8 @@
         <div class="col-12">
             <div class="row">
                 <div class="col-12 form-floating">
-                    <input type="email" name="email" class="form-control" id="email" v-model="email" placeholder="name@example.com">
-                          <label for="floatingInput" class="floatingInput">Email address</label>
+                    <input type="username" name="username" class="form-control" id="username" v-model="username" placeholder="name@example.com">
+                          <label for="floatingInput" class="floatingInput">Username address</label>
 
                 </div>
             </div>
@@ -43,7 +43,7 @@ export default {
   name: "LoginView",
   data() {
     return {
-      email: "",
+      username: "",
       password: "",
       errorMessage: null,
     };
@@ -55,11 +55,7 @@ export default {
       let errorMessageEl = document.getElementById('errorMessage');
       errorMessageEl.innerHTML = "";
 
-      axios.post("http://localhost/users/login", 
-        {
-          "email": this.email,
-          "password": this.password
-        }
+      axios.get(`http://localhost:8080/login/username=${this.username}&password=${this.password}`
       )
       .then(result => {
           localStorage.token = result.data.token;

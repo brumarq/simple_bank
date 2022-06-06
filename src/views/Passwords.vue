@@ -1,17 +1,48 @@
 <template>
   <div class="container">
-    <h1 class="mt-5">My Passwords</h1>
+    <h1 class="mt-5">Home</h1>
     <hr />
     <div class="row mb-3">
       <div class="col-12">
         <button
           type="button"
-          class="btn btn-success"
-          style="float: right"
+          class="btn btn-success m-1"
           data-bs-toggle="modal"
           data-bs-target="#cartModal"
         >
-          Add
+          Create account
+        </button>
+        <button
+          type="button"
+          class="btn btn-success m-1"
+          data-bs-toggle="modal"
+          data-bs-target="#cartModal"
+        >
+          Get account
+        </button>
+        <button
+          type="button"
+          class="btn btn-success m-1"
+          data-bs-toggle="modal"
+          data-bs-target="#cartModal"
+        >
+          Get all accounts
+        </button>
+        <button
+          type="button"
+          class="btn btn-warning m-1"
+          data-bs-toggle="modal"
+          data-bs-target="#cartModal"
+        >
+          Create transaction
+        </button>
+        <button
+          type="button"
+          class="btn btn-warning m-1"
+          data-bs-toggle="modal"
+          data-bs-target="#cartModal"
+        >
+          Get transactions
         </button>
       </div>
     </div>
