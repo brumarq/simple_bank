@@ -55,11 +55,11 @@ export default {
       let errorMessageEl = document.getElementById('errorMessage');
       errorMessageEl.innerHTML = "";
 
-      axios.get(`http://localhost:8080/login/username=${this.username}&password=${this.password}`
+      axios.get(`http://localhost:5000/api/login/username=${this.username}&password=${this.password}`
       )
       .then(result => {
           localStorage.token = result.data.token;
-          this.$router.push({ path: '/passwords' })
+          this.$router.push({ path: '/home' })
       }).catch((error) => {
         errorMessageEl.innerHTML = error.response.data.errorMessage;
       });

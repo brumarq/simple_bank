@@ -1,48 +1,17 @@
 <template>
   <div class="container">
-    <h1 class="mt-5">Home</h1>
+    <h1 class="mt-5">Customers</h1>
     <hr />
     <div class="row mb-3">
       <div class="col-12">
+        
         <button
           type="button"
           class="btn btn-success m-1"
           data-bs-toggle="modal"
           data-bs-target="#cartModal"
         >
-          Create account
-        </button>
-        <button
-          type="button"
-          class="btn btn-success m-1"
-          data-bs-toggle="modal"
-          data-bs-target="#cartModal"
-        >
-          Get account
-        </button>
-        <button
-          type="button"
-          class="btn btn-success m-1"
-          data-bs-toggle="modal"
-          data-bs-target="#cartModal"
-        >
-          Get all accounts
-        </button>
-        <button
-          type="button"
-          class="btn btn-warning m-1"
-          data-bs-toggle="modal"
-          data-bs-target="#cartModal"
-        >
-          Create transaction
-        </button>
-        <button
-          type="button"
-          class="btn btn-warning m-1"
-          data-bs-toggle="modal"
-          data-bs-target="#cartModal"
-        >
-          Get transactions
+          Add customer
         </button>
       </div>
     </div>
@@ -52,7 +21,7 @@
         v-for="password in passwords"
         :key="password.passwordId"
       >
-        <Password :password="password"/>
+        <Customer />
       </li>
     </ul>
   </div>
@@ -122,7 +91,7 @@
 
 <script>
 import axios from "axios";
-import Password from '@/components/Password.vue'
+import Customer from '@/components/Customer.vue'
 
 export default {
   name: "HelloWorld",
@@ -130,11 +99,11 @@ export default {
     msg: String,
   },
   components: {
-    Password
+    Customer
   },
   data() {
     return {
-      passwords: [],
+      customers: [],
     };
   },
   mounted() {
@@ -142,17 +111,18 @@ export default {
       this.getPasswords();
     });
     this.emitter.emit("getLoggedUser");
-    this.getPasswords();
+    this.loadCustomers();
   },
   methods: {
-    getPasswords() {
+    loadCustomers() {
+      axios.defaults.headers.common["Authorization"] = 
+        "Bearer " + localStorage.token;
+
       if (localStorage.getItem("token") !== "" && localStorage.token) {
         axios
-          .get("http://localhost/passwords", {
-            headers: { Authorization: `Bearer ${localStorage.token}` },
-          })
+          .get("http://localhost:5000/api/customers?skip=0&limit=20")
           .then((response) => {
-            this.passwords = response.data;
+            this.customers = response.data;
           })
           .catch((error) => {
             if (error.response.status == 401) {
