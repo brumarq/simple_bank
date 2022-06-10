@@ -58,7 +58,8 @@ export default {
       axios.get(`http://localhost:5000/api/login/username=${this.username}&password=${this.password}`
       )
       .then(result => {
-          localStorage.token = result.data.token;
+          localStorage.token = result.data.jwtToken;
+          console.log(localStorage.token);
           this.$router.push({ path: '/home' })
       }).catch((error) => {
         errorMessageEl.innerHTML = error.response.data.errorMessage;
